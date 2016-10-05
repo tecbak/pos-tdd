@@ -1,16 +1,14 @@
 package ua.rd.pos;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ua.rd.pos.coin.Coin;
-import ua.rd.pos.coin.Coins;
 import ua.rd.pos.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static ua.rd.pos.coin.Coins.*;
 
 public class PosTest {
@@ -49,12 +47,12 @@ public class PosTest {
     @Test
     public void testReturnChange() throws Exception {
         pos.insertCoin(FIFTY);
-        pos.buy("tea");
+        pos.buy("coffee");
         List<Coin> actual = pos.returnCoins();
         List<Coin> expected = new ArrayList<>();
-        expected.add(TWENTY_FIVE);
+        expected.add(TEN);
+        expected.add(FIVE);
         assertEquals(expected, actual);
-
     }
 }
 

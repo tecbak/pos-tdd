@@ -26,25 +26,35 @@ public class Pos {
     public Product buy(String name) {
         Product product = Products.valueOf(name.toUpperCase());
         if (totalValue(coins) >= product.getPrice()) {
-            coins = getChange(coins, product.getPrice());
+            coins = getChange(totalValue(coins), product.getPrice());
             return product;
         } else {
             return null;
         }
     }
 
-    private List<Coin> getChange(List<Coin> coins, int price) {
+    private List<Coin> getChange(int paid, int price) {
+        if (paid < price) throw new IllegalArgumentException("Paid can't be less then price");
+
         List<Coin> change = new ArrayList<>();
-        while (price > 0) {
-            for (Coins coin : Coins.values()) {
-                if (price >= coin.getValue()) {
-                    change.add(coin);
-                    price -= coin.getValue();
-                    break;
-                }
+        if (paid > price) {
+            int moneyToReturn = paid - price;
+            while (moneyToReturn > 0) {
+                Coin coin = getTheMostExpensiveCoin(moneyToReturn, Coins.values());
+                moneyToReturn -= coin.getValue();
+                change.add(coin);
             }
         }
         return change;
+    }
+
+    private Coin getTheMostExpensiveCoin(int limit, Coin[] coins) {
+        for (Coin coin : coins) {
+            if (coin.getValue() <= limit) {
+                return coin;
+            }
+        }
+        throw new IllegalStateException("No suitable coin");
     }
 
     private int totalValue(List<Coin> coins) {
