@@ -15,7 +15,7 @@ public enum Products implements Product {
 
     @Override
     public int getPrice() {
-        return 0;
+        return price;
     }
 
     @Override

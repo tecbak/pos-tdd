@@ -1,11 +1,11 @@
 package ua.rd.pos.coin;
 
 public enum Coins implements Coin {
-    ONE(1),
-    FIVE(5),
-    TEN(10),
+    FIFTY(50),
     TWENTY_FIVE(25),
-    FIFTY(50);
+    TEN(10),
+    FIVE(5),
+    ONE(1);
 
     private int value;
 

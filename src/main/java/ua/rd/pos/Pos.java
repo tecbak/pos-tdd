@@ -37,7 +37,7 @@ public class Pos {
         List<Coin> change = new ArrayList<>();
         while (price > 0) {
             for (Coins coin : Coins.values()) {
-                if (coin.getValue() < price) {
+                if (price >= coin.getValue()) {
                     change.add(coin);
                     price -= coin.getValue();
                     break;

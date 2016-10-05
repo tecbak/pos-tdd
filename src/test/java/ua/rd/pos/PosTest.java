@@ -11,30 +11,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static ua.rd.pos.coin.Coins.*;
 
 public class PosTest {
     private Pos pos;
-    private Coin one;
-    private Coin five;
-    private Coin twentyFive;
+
 
     @Before
     public void setUp() throws Exception {
         pos = new Pos();
-        one = Coins.ONE;
-        five = Coins.FIVE;
-        twentyFive = Coins.TWENTY_FIVE;
+
     }
 
     @Test
     public void testInsertAndReturnCoin() throws Exception {
-        pos.insertCoin(one);
-        pos.insertCoin(five);
+        pos.insertCoin(ONE);
+        pos.insertCoin(FIVE);
 
         List<Coin> expected = pos.returnCoins();
         List<Coin> actual = new ArrayList<Coin>() {{
-            add(one);
-            add(five);
+            add(ONE);
+            add(FIVE);
         }};
 
         assertEquals(expected, actual);
@@ -42,11 +39,22 @@ public class PosTest {
 
     @Test
     public void testBuyProduct() throws Exception {
-        pos.insertCoin(twentyFive);
+        pos.insertCoin(TWENTY_FIVE);
         Product purchasedProduct = pos.buy("tea");
         String actual = purchasedProduct.getName();
         String expected = "Tea";
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testReturnChange() throws Exception {
+        pos.insertCoin(FIFTY);
+        pos.buy("tea");
+        List<Coin> actual = pos.returnCoins();
+        List<Coin> expected = new ArrayList<>();
+        expected.add(TWENTY_FIVE);
+        assertEquals(expected, actual);
+
     }
 }
 
