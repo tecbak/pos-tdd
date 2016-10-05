@@ -1,5 +1,7 @@
 package ua.rd.pos;
 
+import ua.rd.pos.coin.Coin;
+
 import java.util.ArrayList;
 import java.util.List;
 

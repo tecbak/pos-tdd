@@ -3,6 +3,8 @@ package ua.rd.pos;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ua.rd.pos.coin.Coin;
+import ua.rd.pos.coin.Coins;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,6 @@ public class PosTest {
     @Before
     public void setUp() throws Exception {
         pos = new Pos();
-
     }
 
     @Test
