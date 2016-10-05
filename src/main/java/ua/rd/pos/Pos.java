@@ -15,18 +15,19 @@ public class Pos {
         coins.add(coin);
     }
 
-
     public List<Coin> returnCoins() {
         List<Coin> coinsToReturn = coins;
         coins = null;
         return coinsToReturn;
     }
 
-
     public Product buy(String name) {
         Product product = Products.valueOf(name.toUpperCase());
-        if (totalValue(coins) >= product.getPrice()) {
-            coins = getChange(totalValue(coins), product.getPrice());
+        int coinsValue = totalValue(coins);
+        int productPrice = product.getPrice();
+
+        if (coinsValue >= productPrice) {
+            coins = getChange(coinsValue, productPrice);
             return product;
         } else {
             return null;
